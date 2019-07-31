@@ -3,13 +3,14 @@ import os
 import json
 
 import tensorflow as tf
+tf.random.set_random_seed(42)
 import numpy as np
 
 from config import TrainConfig as C
 
 
 def get_frame_fpath(episode, frame):
-    return os.path.join(C.frame_root_dpath, episode, "{:05d}.jpg".format(frame)) 
+    return os.path.join(C.frame_root_dpath, episode, "{}.jpg".format(frame)) 
 
 
 def __merge(dups):

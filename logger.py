@@ -7,6 +7,7 @@ import numpy as np
 import scipy.misc
 from io import BytesIO
 import tensorflow as tf
+tf.random.set_random_seed(42)
 
 
 class Logger(object):

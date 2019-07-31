@@ -1,5 +1,6 @@
 from collections import defaultdict
 import json
+import io
 
 import parse
 
@@ -8,7 +9,8 @@ from config import ListConfig as C
 
 def load_annotation(season, episode):
     annotation_fpath = C.annotation_fpath_tpl.format(season, episode)
-    with open(annotation_fpath, 'r') as fin:
+    with io.open(annotation_fpath, 'r', encoding='ascii', errors='ignore') as fin:
+        print(annotation_fpath)
         annotation = json.load(fin)
     return annotation
 

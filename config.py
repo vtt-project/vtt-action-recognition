@@ -38,7 +38,7 @@ class CommonConfig:
     list_dpath = os.path.join(data_root_dpath, "lists")
     annotation_dpath = os.path.join(data_root_dpath, "annotations")
 
-    frame_fpath_tpl = os.path.join(frame_dpath_tpl, "{:05d}.jpg")
+    frame_fpath_tpl = os.path.join(frame_dpath_tpl, "{:d}.jpg")
     annotation_fpath_tpl = os.path.join(annotation_dpath, "S{:02d}_EP{:02d}.json")
     list_fpath_tpl = os.path.join(list_dpath, "friends_S{:02d}_EP{:02d}.list")
 
@@ -57,7 +57,7 @@ class CommonConfig:
     actions = list(idx2rep.values())
     action_labels = list(idx2rep.keys())
 
-    fps_used_to_extract_frames = 5
+    fps_used_to_extract_frames = 3
     n_frames_per_clip = 16
 
     model_tag = "C3D"
@@ -133,7 +133,7 @@ class PredConfig(DataLoaderConfig):
     seasons = [ 1 ]
     episodes_list = [ range(1, 24) ]
 
-    model_name = "C3D | bbox-OFF | lr-st-1e-05-fn-1e-05 | pt-None | 181208-11:08:24"
+    model_name = "C3D | bbox-OFF | lr-st-1e-05-fn-1e-05 | pt-None | 190729-07:59:43"
     n_iterations = 40000
     model_fpath = os.path.join(DataLoaderConfig.model_root_dpath, model_name, "model-{}".format(n_iterations))
     prediction_fpath_tpl = os.path.join(prediction_root_dpath, model_name, str(n_iterations),

@@ -5,6 +5,7 @@ import cv2
 import numpy as np
 import sklearn.metrics
 import tensorflow as tf
+tf.random.set_random_seed(42)
 
 from config import TrainConfig as C
 from dataset import load_dataset

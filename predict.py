@@ -4,6 +4,7 @@ import os
 import time
 
 import tensorflow as tf
+tf.random.set_random_seed(42)
 from tqdm import tqdm
 import numpy as np
 

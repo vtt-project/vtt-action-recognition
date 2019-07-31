@@ -75,7 +75,7 @@ def get_episode_list(season, episode):
 
     annotations = load_annotation(season, episode)
 
-    frame_fnames = os.listdir(os.path.join("data/friends_trimmed/frames", "S{:02d}_EP{:02d}".format(season, episode)))
+    frame_fnames = os.listdir(os.path.join("data/friends/frames", "S{:02d}_EP{:02d}".format(season, episode)))
     frame_numbers = [ parse_frame_number(fname) for fname in frame_fnames ]
     terminal_frame = max(frame_numbers)
 
