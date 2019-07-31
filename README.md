@@ -20,13 +20,18 @@ And I borrowed some codes which implement following networks
 
 # How to use
 
+*\* NOTE: You can download a pretrained model from below links, and go to Step 6. predict*
+* link1-1: https://drive.google.com/open?id=1BNoNDcZSu8TaJtOAdAIVaRwnYQ58uEGG
+* link1-2: https://drive.google.com/open?id=1LKX7sIExiKZp0-hdmbxMAtxWpTnyycwI
+* link1-3: https://drive.google.com/open?id=1vidUqgGnuEBSNRlOjNMWDBO9f1Yi3XGQ
+
 
 ## Step 1. Prepare Data
 
 For this project, you need to have following two data.
 * Frames of each *Friends* video
   1. Download *Friends* videos.
-  2. Extract frames from each video on 5 fps, and locate them on 
+  2. Extract frames from each video on 3 fps, and locate them on 
      `<project_root>/data/friends/frames/S<season>_EP<episode>/<frame_number>.jpg`
   
      e.g. `<project_root>/data/friends/frames/S01_EP01/00001.jpg`
