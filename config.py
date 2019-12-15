@@ -57,7 +57,7 @@ class CommonConfig:
     actions = list(idx2rep.values())
     action_labels = list(idx2rep.keys())
 
-    fps_used_to_extract_frames = 3
+    fps_used_to_extract_frames = 5
     n_frames_per_clip = 16
 
     model_tag = "C3D"
@@ -71,9 +71,11 @@ class CommonConfig:
 
 class ListConfig(CommonConfig):
     seasons = [ 1 ]
-    episodes_list = [ range(1, 24) ]
+    episodes_list = [ list(range(1, 24)) ]
 
-    train_ratio = 0.7
+    # train_ratio = 0.7
+    train_episodes_list = [ list(range(1, 6)) + list(range(7, 24)) ]
+    test_episodes_list = [ [ 6 ] ]
 
     bbox_tag = "full_rect" # [ "face_rect", "full_rect" ]
     bbox_labels = [ "min_x", "min_y", "max_x", "max_y" ]
@@ -83,7 +85,7 @@ class ListConfig(CommonConfig):
 
 
 class DataLoaderConfig(CommonConfig):
-    use_bbox = False
+    use_bbox = True
     bbox_mode = "fit" # [ "fit", "center_pad" ]
 
     crop_size = 112
@@ -113,8 +115,8 @@ class TrainConfig(DataLoaderConfig):
     class_weights = weight_classes(DataLoaderConfig.train_list_fpath, DataLoaderConfig.n_actions)
 
     timestamp = time.strftime("%y%m%d-%H:%M:%S", time.gmtime())
-    id = "{} | bbox-{} | lr-st-{}-fn-{} | pt-{} | {}".format(
-        DataLoaderConfig.model_tag, 'ON' if DataLoaderConfig.use_bbox else 'OFF', lr_stable, lr_finetune,
+    id = "{} | bbox-{}-{} | lr-st-{}-fn-{} | pt-{} | {}".format(
+        DataLoaderConfig.model_tag, 'ON' if DataLoaderConfig.use_bbox else 'OFF', DataLoaderConfig.bbox_mode, lr_stable, lr_finetune,
         pretrained_model_name if use_pretrained_model else "None", timestamp)
 
     log_root_dpath = "logs"

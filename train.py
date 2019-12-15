@@ -6,6 +6,7 @@ import numpy as np
 import sklearn.metrics
 import tensorflow as tf
 tf.random.set_random_seed(42)
+from tqdm import tqdm
 
 from config import TrainConfig as C
 from dataset import load_dataset
@@ -15,7 +16,8 @@ from nets import c3d as network
 
 
 # Basic model parameters
-GPU_LIST = [ int(i) for i in os.environ["CUDA_VISIBLE_DEVICES"].split(",")]
+# GPU_LIST = [ int(i) for i in os.environ["CUDA_VISIBLE_DEVICES"].split(",") ]
+GPU_LIST = [ 6 ]
 N_GPU = len(GPU_LIST)
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"   # see issue #152
 
@@ -293,7 +295,7 @@ def run_training():
         sess.run(init)
 
         # Train
-        for step in range(1, C.n_iterations + 1):
+        for step in tqdm(range(1, C.n_iterations + 1)):
             train_clips, train_labels, _, _ = sess.run(train_next_batch)
             sess.run(model["train_op"], feed_dict={
                 model["images_placeholder"]: train_clips,

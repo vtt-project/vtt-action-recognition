@@ -85,7 +85,7 @@ def parse_total_list():
     return total_list
 
 
-def split_list(total_list):
+def split_list_random(total_list):
     # Get the indices of total list according to an action index.
     actionLabel_listIdxs_dict = { label: [] for label in C.action_labels }
     for i, d in enumerate(total_list):
@@ -121,12 +121,24 @@ def split_list(total_list):
     return train_list, test_list
 
 
+def split_list_fixed(total_list):
+    total_list = [ [ ep, str(s), str(e), ','.join(ls), ','.join(bb) ] for ep, s, e, ls, bb in total_list ]
+
+    train_episodes_list = [ "S{:02d}_EP{:02d}".format(S, EP) for S, EPs in zip(C.seasons, C.train_episodes_list) for EP in EPs ]
+    test_episodes_list = [ "S{:02d}_EP{:02d}".format(S, EP) for S, EPs in zip(C.seasons, C.test_episodes_list) for EP in EPs ]
+
+    train_list = [ '\t'.join(d) for d in total_list if d[0] in train_episodes_list ]
+    test_list = [ '\t'.join(d) for d in total_list if d[0] in test_episodes_list ]
+    return train_list, test_list
+
+
 def generate_train_test_list():
     os.makedirs(C.list_dpath, exist_ok=True)
 
     print("Generating a training and a test list...")
     total_list = parse_total_list()
-    train_list, test_list = split_list(total_list)
+    # train_list, test_list = split_list_random(total_list)
+    train_list, test_list = split_list_fixed(total_list)
 
     with open(C.train_list_fpath, 'w') as fout:
         fout.write('\n'.join(train_list))

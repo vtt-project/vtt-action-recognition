@@ -158,7 +158,7 @@ def generate_demo(season, episode):
     demo_fpath = C.demo_fpath_tpl.format(season, episode)
     fourcc = cv2.VideoWriter_fourcc("m", "p", "4", "v")
     pane_width = 1000
-    vout = cv2.VideoWriter(demo_fpath, apiPreference=0, fourcc=fourcc, fps=3, frameSize=(width + pane_width, height))
+    vout = cv2.VideoWriter(demo_fpath, apiPreference=0, fourcc=fourcc, fps=5, frameSize=(width + pane_width, height))
     for pred in prediction_results:
         frame_number = pred["frame"]
         ground_truths = pred["ground_truths"]
@@ -228,7 +228,7 @@ def generate_demo_with_bbox(season, episode):
     demo_fpath = C.demo_fpath_tpl.format(season, episode)
     fourcc = cv2.VideoWriter_fourcc("m", "p", "4", "v")
     pane_width = 1000
-    vout = cv2.VideoWriter(demo_fpath, apiPreference=0, fourcc=fourcc, fps=3, frameSize=(width + pane_width, height))
+    vout = cv2.VideoWriter(demo_fpath, apiPreference=0, fourcc=fourcc, fps=5, frameSize=(width + pane_width, height))
 
     prediction_results = merge_along_frame(prediction_results)
 
