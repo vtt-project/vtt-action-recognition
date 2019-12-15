@@ -133,9 +133,10 @@ class PredConfig(DataLoaderConfig):
     integration_fpath_tpl = os.path.join(integration_dpath, "friends_s{:02d}_e{:02d}.jsonl")
 
     seasons = [ 1 ]
-    episodes_list = [ range(1, 24) ]
+    # episodes_list = [ range(1, 24) ]
+    episodes_list = [ [ 6 ] ]
 
-    model_name = "C3D | bbox-OFF | lr-st-1e-05-fn-1e-05 | pt-None | 190729-07:59:43"
+    model_name = "5FPS"
     n_iterations = 40000
     model_fpath = os.path.join(DataLoaderConfig.model_root_dpath, model_name, "model-{}".format(n_iterations))
     prediction_fpath_tpl = os.path.join(prediction_root_dpath, model_name, str(n_iterations),

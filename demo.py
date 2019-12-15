@@ -70,15 +70,17 @@ def generate_frame_with_bbox(frame, ground_truths_list, actions_list, bbox_list,
     h, w, c = frame.shape
 
     pane_width = 1000
-    block_height = h // 9
+    block_height = h // 12
     margin_left = 40
     text_width = 350
     bar_width = 450
     frame = cv2.copyMakeBorder(frame, 0, 0, 0, pane_width, cv2.BORDER_CONSTANT, None, (0, 0, 0))
 
     n_data = len(ground_truths_list)
-    n_block_per_char = [ None, 5, 3, 2, 1, 1, 1 ][n_data]
-    colors = [ (0, 0, 255), (255, 0, 0), (255, 0, 255), (255, 255, 0), (0, 255, 255), (128, 255, 128) ]
+    n_block_per_char = [ None, 5, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1 ][n_data]
+    colors = [ (255, 0, 0), (0, 0, 255), (255, 255, 0), (255, 0, 255), (0, 255, 255),
+               (255, 255, 128), (255, 128, 255), (128, 255, 255), (255, 128, 128),
+               (128, 255, 128), (128, 128, 255) ]
     for k, (ground_truths, actions, bbox, theme_color) in enumerate(zip(ground_truths_list, actions_list, bbox_list, colors)):
         top = k * n_block_per_char * block_height
         left = w + margin_left
@@ -103,7 +105,7 @@ def generate_frame_with_bbox(frame, ground_truths_list, actions_list, bbox_list,
             text="Ground truth: {}".format("-" if len(ground_truths) == 0 else ", ".join(ground_truths)),
             org=(left, top + 1 * block_height),
             fontFace=cv2.FONT_HERSHEY_SIMPLEX,
-            fontScale=1,
+            fontScale=0.7,
             color=(0, 255, 0),
             thickness=3)
 
@@ -118,7 +120,7 @@ def generate_frame_with_bbox(frame, ground_truths_list, actions_list, bbox_list,
                 text=action,
                 org=(left, top + i * block_height),
                 fontFace=cv2.FONT_HERSHEY_SIMPLEX,
-                fontScale=1,
+                fontScale=0.7,
                 color=(0, 0, 255) if high_probability else (255, 255, 255),
                 thickness=3)
             frame = cv2.rectangle(
@@ -137,7 +139,7 @@ def generate_frame_with_bbox(frame, ground_truths_list, actions_list, bbox_list,
                 text="{:.2f}".format(score),
                 org=(left + text_width + bar_width + margin_left, top + i * block_height),
                 fontFace=cv2.FONT_HERSHEY_SIMPLEX,
-                fontScale=1,
+                fontScale=0.7,
                 color=theme_color if high_probability else (255, 255, 255),
                 thickness=3)
     return frame

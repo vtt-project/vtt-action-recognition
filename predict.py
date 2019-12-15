@@ -134,7 +134,7 @@ def run_test():
         }
     logits = []
     for i, gpu_index in enumerate(GPU_LIST):
-        with tf.device('/gpu:%d' % gpu_index):
+        with tf.device('/gpu:%d' % i):
             logit, _ = network.inference(
                 _X=images_placeholder[i * C.batch_size:(i + 1) * C.batch_size,:,:,:,:],
                 _keep_prob=1,
